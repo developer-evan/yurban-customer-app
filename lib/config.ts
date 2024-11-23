@@ -5,7 +5,7 @@ export interface AppConfig {
   }
 
 const config: AppConfig = {
-  apiUrl: "http://192.168.100.114:8000/api",
+  apiUrl: "https://yurban-server-2.onrender.com/api",
 //   appUrl: process.env.REACT_APP_APP_URL as string,
 //   appName: process.env.REACT_APP_APP_NAME as string,
 };
