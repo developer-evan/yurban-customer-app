@@ -47,57 +47,6 @@ export default function HomeScreen() {
     queryKey: ["profile"],
     queryFn: getUserProfile,
   });
-  // const updateTaskMutation = useMutation({
-  //   mutationFn: async (updatedTask: any) => {
-  //     return updateTask(id, updatedTask);
-  //   },
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["task"] });
-  //     ToastAndroid.show("Task updated successfully", ToastAndroid.LONG);
-  //     router.push("/tasks");
-  //   },
-  //   onError: (error: any) => {
-  //     ToastAndroid.show(
-  //       error?.response?.data?.message || "Something went wrong",
-  //       ToastAndroid.LONG
-  //     );
-  //   },
-  // });
-  // const mutation = useMutation<void, Error, { status: string }>({
-  //   mutationFn: updateDriverStatus,
-  //   onSuccess: () => {
-  //     // Invalidate and refetch profile data to update UI
-  //     queryClient.invalidateQueries({ queryKey: ["profile"] });
-  //     ToastAndroid.show("Status updated successfully!", ToastAndroid.SHORT);
-  //   },
-  //   onError: (error: any) => {
-  //     ToastAndroid.show(
-  //       `Error updating status: ${error.message}`,
-  //       ToastAndroid.SHORT
-  //     );
-  //   },
-  // });
-
-  // const updateStatusMutation = useMutation({
-  //   mutationFn: async (newStatus: any) => {
-  //     return updateDriverStatus(newStatus);
-  //   },
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["profile"] });
-  //     ToastAndroid.show("Status updated successfully!", ToastAndroid.SHORT);
-  //   },
-  //   onError: (error: any) => {
-  //     ToastAndroid.show(
-  //       error?.response?.data?.message || "Something went wrong",
-  //       ToastAndroid.LONG
-  //     );
-  //   },
-  // });
-
-  // const toggleStatus = () => {
-  //   const newStatus = user?.user?.status === "Online" ? "Offline" : "Online";
-  //   updateStatusMutation.mutate({ status: newStatus });
-  // };
 
   if (loading || userLoading) {
     return (
@@ -127,36 +76,22 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.statusContainer}>
-        {/* <Text style={styles.statusText}>
-          {user?.user?.status === "Online"
-            ? "You are ONLINE"
-            : "You are OFFLINE"}
-        </Text> */}
         <TouchableOpacity
           style={[
             styles.toggleButton,
             {
-              backgroundColor:
-                user?.user?.status === "Online" ? "red" : Colors.light.tint,
+              backgroundColor: Colors.light.tint,
             },
           ]}
           // onPress={toggleStatus}
           onPress={() => router.push("/(tabs)/home/request/request" as any)}
-
-
         >
-          <Text style={styles.toggleButtonText}>
-            {/* {user?.user?.status === "Online" ? "GO OFFLINE" : "GO ONLINE"} */}
-            Request a Ride
-          
-          </Text>
-          <ArrowRightCircle size={24}
+          <Text style={styles.toggleButtonText}>Request a Ride</Text>
+          <ArrowRightCircle
+            size={24}
             color="white"
-            style={{ position: "absolute", right: 20 ,
-            top: 10
-            }}
-           />
-          
+            style={{ position: "absolute", right: 20, top: 10 }}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -180,11 +115,10 @@ const styles = StyleSheet.create({
     // backgroundColor: "#1a1a1a",
     // transparent and opacity
     backgroundColor: "rgba(26, 26, 26, 0.7)",
-    position: "absolute",
+    // position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
-
   },
   statusText: {
     fontSize: 18,

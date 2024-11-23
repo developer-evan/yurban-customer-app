@@ -42,10 +42,10 @@ const StartScreen = () => {
       />
 
       {/* Welcome Message */}
-      <Text style={styles.title}>Welcome to the Yurban Driver App</Text>
+      <Text style={styles.title}>Welcome to the Yurban Customer App</Text>
       <Text style={styles.subtitle}>
-        The easiest way to get around the city. Get a ride in minutes. Or become
-        a driver and earn money on your schedule.
+        Book a ride, track your driver, and enjoy the best ride-hailing
+        experience.
       </Text>
 
       {/* Indicator */}
