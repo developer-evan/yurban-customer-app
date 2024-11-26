@@ -10,14 +10,12 @@ import {
   Image,
   ToastAndroid,
 } from "react-native";
-import axios from "axios";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { counties } from "@/constants/counties";
 import RNPickerSelect from "react-native-picker-select";
-// import Toast from "react-native-root-toast";
-
-const API_URL = "http://192.168.100.114:8000/api/auth/register"; // Update with your API URL
+import config from "@/lib/config";
+import { axiosInstance } from "@/lib/axiosInstance";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -30,6 +28,7 @@ export default function SignUp() {
   const [subCounties, setSubCounties] = useState<string[]>([]);
   const [subCounty, setSubCounty] = useState("");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   // Handle county selection and populate sub-counties
   const handleCountySelect = (countyName: React.SetStateAction<string>) => {
@@ -50,50 +49,34 @@ export default function SignUp() {
       !county ||
       !subCounty
     ) {
-      Alert.alert("Error", "Please fill in all fields.");
+      // Alert.alert("Error", "Please fill in all fields.");
+      ToastAndroid.show("Please fill in all fields.", ToastAndroid.SHORT);
       return;
     }
 
     try {
-      const response = await axios.post(API_URL, {
-        firstName,
-        lastName,
-        phoneNumber,
-        pin,
-        gender,
-        email,
-        role: "Customer",
-        county,
-        subCounty,
-      });
+      const response = await axiosInstance.post(
+        `${config.apiUrl}/auth/register`,
+        {
+          firstName,
+          lastName,
+          phoneNumber,
+          pin,
+          gender,
+          email,
+          role: "Customer",
+          county,
+          subCounty,
+        }
+      );
 
       const { message } = response.data;
-      // Alert.alert("Success", message, [
-      //   { text: "OK", onPress: () => router.push("/(auth)/sign-in") },
-      // ]);
-      // Toast.show(message, {
-      //   duration: Toast.durations.LONG,
-      //   position: Toast.positions.BOTTOM,
-      //   backgroundColor: Colors.light.tint,
-      //   shadow: true,
-      //   animation: true,
-      //   hideOnPress: true,
-      //   delay: 0,
-      // });
+
       ToastAndroid.show(message, ToastAndroid.LONG);
       router.push("/(auth)/sign-in");
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "An error occurred";
-      // Alert.alert("Error", errorMessage);
-      // Toast.show(errorMessage, {
-      //   duration: Toast.durations.LONG,
-      //   position: Toast.positions.BOTTOM,
-      //   backgroundColor: Colors.light.tint,
-      //   shadow: true,
-      //   animation: true,
-      //   hideOnPress: true,
-      //   delay: 0,
-      // });
+
       ToastAndroid.show(errorMessage, ToastAndroid.LONG);
     }
   };
@@ -190,7 +173,9 @@ export default function SignUp() {
       )}
 
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Sign Up</Text>
+        <Text style={styles.buttonText}>
+          {loading ? "Loading..." : "Sign Up"}
+        </Text>
       </TouchableOpacity>
 
       <Text style={styles.footer}>

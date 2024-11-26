@@ -4,23 +4,50 @@ import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { jwtDecode } from "jwt-decode";
 
 const StartScreen = () => {
   const router = useRouter();
+
+  // useEffect(() => {
+  //   const checkAuthState = async () => {
+  //     try {
+  //       const accessToken = await AsyncStorage.getItem("session_token");
+  //       const userRole = await AsyncStorage.getItem("user_role");
+  //       if (accessToken && userRole === "Customer") {
+  //         router.replace("/(tabs)/home"); // Redirect to Home if token and role are valid
+  //       }
+  //       //  else {
+  //       //   router.replace("/(auth)"); // Redirect to Sign In if no token or invalid role
+  //       // }
+  //     } catch (error) {
+  //       console.error("Error checking auth state:", error);
+  //     }
+  //   };
+  //   checkAuthState();
+  // }, []);
 
   useEffect(() => {
     const checkAuthState = async () => {
       try {
         const accessToken = await AsyncStorage.getItem("session_token");
         if (accessToken) {
-          router.replace("/(tabs)/home"); // Redirect to Home if token exists
+          // Decode the token to extract user info
+          const decodedToken = jwtDecode(accessToken);
+
+          if (decodedToken.role === "Customer") {
+            router.replace("/(tabs)/home"); // Redirect to Home if Customer
+          } else {
+            console.log("Access denied: Not a Customer");
+          }
         } else {
-          router.replace("/(auth)/sign-in"); // Redirect to Sign In if no token
+          console.log("No token found. Please sign in.");
         }
       } catch (error) {
         console.error("Error checking auth state:", error);
       }
     };
+
     checkAuthState();
   }, []);
 

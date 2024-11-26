@@ -19,12 +19,11 @@ import config from "@/lib/config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { decodeAuthToken } from "@/lib/decodeToken";
 
-// const API_URL = "http://192.168.100.114:8000/api/auth/login";
-
 export default function App() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [pin, setPin] = useState("");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!phoneNumber || !pin) {
@@ -86,7 +85,6 @@ export default function App() {
           // padding: 20,
         }}
       />
-
       <View style={styles.title}>
         <Text
           style={{
@@ -138,7 +136,9 @@ export default function App() {
 
       {/* <Button title="Login" onPress={handleLogin} /> */}
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Sign In</Text>
+        <Text style={styles.buttonText}>
+          {loading ? "Loading..." : "Sign In"}
+        </Text>
       </TouchableOpacity>
       <Text style={styles.footer}>
         Don't have an account?{" "}

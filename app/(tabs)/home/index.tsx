@@ -84,7 +84,7 @@ export default function HomeScreen() {
             },
           ]}
           // onPress={toggleStatus}
-          onPress={() => router.push("/(tabs)/home/request/request" as any)}
+          onPress={() => router.push("/(screens)/request/request" as any)}
         >
           <Text style={styles.toggleButtonText}>Request a Ride</Text>
           <ArrowRightCircle

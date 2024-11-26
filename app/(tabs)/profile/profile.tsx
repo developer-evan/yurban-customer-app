@@ -74,32 +74,117 @@ const Profile = () => {
             </Text>
           </View>
         </View>
+        <View
+          style={{
+            // borderBottomWidth: 1,
+            // borderBottomColor: "#f1f1f1",
+            marginBottom: 8,
+            paddingBottom: 5,
+          }}
+        >
+          <Text
+            style={{
+              color: Colors.light.tint,
+            }}
+          >
+            Email
+          </Text>
 
-        <View style={styles.detailContainer}>
-          <MaterialIcons name="email" size={24} color="#6c757d" />
-          <Text style={styles.detailText}>{user?.user?.email}</Text>
+          <View style={styles.detailContainer}>
+            <MaterialIcons name="email" size={24} color="#6c757d" />
+            <Text style={styles.detailText}>{user?.user?.email}</Text>
+          </View>
+        </View>
+        <View
+          style={{
+            // borderBottomWidth: 1,
+            // borderBottomColor: "#f1f1f1",
+            marginBottom: 8,
+            paddingBottom: 5,
+          }}
+        >
+          <Text
+            style={{
+              color: Colors.light.tint,
+            }}
+          >
+            Phone:
+          </Text>
+
+          <View style={styles.detailContainer}>
+            <FontAwesome name="phone" size={24} color="#6c757d" />
+            <Text style={styles.detailText}>
+              {user?.user?.phoneNumber || "Not available"}
+            </Text>
+          </View>
         </View>
 
-        <View style={styles.detailContainer}>
-          <FontAwesome name="phone" size={24} color="#6c757d" />
-          <Text style={styles.detailText}>
-            {user?.user?.phoneNumber || "Not available"}
+        <View
+          style={{
+            // borderBottomWidth: 1,
+            // borderBottomColor: "#f1f1f1",
+            marginBottom: 8,
+            paddingBottom: 5,
+          }}
+        >
+          <Text
+            style={{
+              color: Colors.light.tint,
+            }}
+          >
+            County
           </Text>
+          <View style={styles.detailContainer}>
+            <MapPinned size={24} color="#6c757d" />
+            <Text style={styles.detailText}>
+              {user?.user?.county || "Not available"}
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            // borderBottomWidth: 1,
+            // borderBottomColor: "#f1f1f1",
+            marginBottom: 8,
+            paddingBottom: 5,
+          }}
+        >
+          <Text
+            style={{
+              color: Colors.light.tint,
+            }}
+          >
+            Sub-County
+          </Text>
+          <View style={styles.detailContainer}>
+            <MapPinned size={24} color="#6c757d" />
+            <Text style={styles.detailText}>
+              {user?.user?.subCounty || "Not available"}
+            </Text>
+          </View>
         </View>
 
-        <View style={styles.detailContainer}>
-          <MapPinned size={24} color="#6c757d" />
-          <Text style={styles.detailText}>
-            {user?.user?.subCounty || "Not available"} -{" "}
-            {user?.user?.county || "Not available"}
+        <View
+          style={{
+            // borderBottomWidth: 1,
+            // borderBottomColor: "#f1f1f1",
+            marginBottom: 8,
+            paddingBottom: 5,
+          }}
+        >
+          <Text
+            style={{
+              color: Colors.light.tint,
+            }}
+          >
+            Gender
           </Text>
-        </View>
-
-        <View style={styles.detailContainer}>
-          <User size={24} color="#6c757d" />
-          <Text style={styles.detailText}>
-            {user?.user?.gender || "Not available"}
-          </Text>
+          <View style={styles.detailContainer}>
+            <User size={24} color="#6c757d" />
+            <Text style={styles.detailText}>
+              {user?.user?.gender || "Not available"}
+            </Text>
+          </View>
         </View>
       </View>
 
@@ -156,7 +241,7 @@ const styles = StyleSheet.create({
   detailContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 5,
   },
   detailText: {
     fontSize: 16,
