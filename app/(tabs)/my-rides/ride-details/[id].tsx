@@ -169,8 +169,8 @@ const RideDetails = () => {
                 ? "orange"
                 : ride.status === "Accepted"
                 ? "green"
-                : ride.status === "Rejected" ?
-                "red"
+                : ride.status === "Rejected"
+                ? "red"
                 : "#007BFF",
           }}
         >
@@ -192,22 +192,22 @@ const RideDetails = () => {
             </Text>
           </View>
         ) : (
-        <TouchableOpacity
-          style={[
-            styles.declineButton,
-            ride.status !== "Pending" && ride.status !== "Accepted"
-              ? { backgroundColor: "#ccc" }
-              : null,
-          ]}
-          onPress={handleDecline}
-          disabled={ride.status !== "Pending" && ride.status !== "Accepted"}
-        >
-          <Text style={styles.buttonText}>
-            {ride.status === "Pending" || ride.status === "Accepted"
-              ? "Cancel Ride"
-              : "Ride Cancelled"}
-          </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.declineButton,
+              ride.status !== "Pending" && ride.status !== "Accepted"
+                ? { backgroundColor: "#ccc" }
+                : null,
+            ]}
+            onPress={handleDecline}
+            disabled={ride.status !== "Pending" && ride.status !== "Accepted"}
+          >
+            <Text style={styles.buttonText}>
+              {ride.status === "Pending" || ride.status === "Accepted"
+                ? "Cancel Ride"
+                : "Ride Cancelled"}
+            </Text>
+          </TouchableOpacity>
         )}
       </View>
     </View>
