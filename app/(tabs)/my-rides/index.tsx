@@ -84,7 +84,8 @@ const MyRides = () => {
                 ? styles.pending
                 : item.status === "Accepted"
                 ? styles.completed
-                : styles.cancelled,
+                : item.status === "Rejected" ? styles.cancelled
+                : styles.complete,
             ]}
           >
             {/* {item.status}
@@ -181,6 +182,9 @@ const styles = StyleSheet.create({
   },
   completed: {
     color: "green",
+  },
+  complete: {
+    color: "#007BFF",
   },
   cancelled: {
     color: "red",

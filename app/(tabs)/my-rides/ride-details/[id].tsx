@@ -169,7 +169,9 @@ const RideDetails = () => {
                 ? "orange"
                 : ride.status === "Accepted"
                 ? "green"
-                : "red",
+                : ride.status === "Rejected" ?
+                "red"
+                : "#007BFF",
           }}
         >
           Status: {ride.status || "-"}
@@ -183,6 +185,13 @@ const RideDetails = () => {
         {/* <TouchableOpacity style={styles.acceptButton} onPress={handleAccept}>
           <Text style={styles.buttonText}>Accept</Text>
         </TouchableOpacity> */}
+        {ride.status === "Completed" ? (
+          <View style={styles.successMessageContainer}>
+            <Text style={styles.successMessage}>
+              The ride has been completed successfully!
+            </Text>
+          </View>
+        ) : (
         <TouchableOpacity
           style={[
             styles.declineButton,
@@ -199,6 +208,7 @@ const RideDetails = () => {
               : "Ride Cancelled"}
           </Text>
         </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -260,6 +270,18 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "#dc3545",
+    fontSize: 16,
+  },
+  successMessageContainer: {
+    padding: 16,
+    backgroundColor: "#d4edda",
+    borderRadius: 5,
+    marginVertical: 20,
+  },
+  successMessage: {
+    color: "#155724",
+    fontWeight: "bold",
+    textAlign: "center",
     fontSize: 16,
   },
 });
